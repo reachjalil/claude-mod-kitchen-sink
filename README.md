@@ -2,11 +2,15 @@
 
 **Learn Claude customization by changing one working example at a time.**
 
-A practical, MIT-licensed workshop for people who want to understand plugins and build their first Claude Code mod. Includes a Cowork workflow plugin, an interactive UI mod, and a [GitHub Pages field guide](https://reachjalil.github.io/claude-mod-kitchen-sink/) with a browser explainer and annotated source.
+A practical, MIT-licensed workshop for people who want to understand plugins and build their first Claude Code mod. Includes a Cowork workflow plugin, an interactive UI mod, and a [GitHub Pages field guide](https://reachjalil.github.io/claude-mod-kitchen-sink/) with an illustrated event-flow explainer, a browser simulation, and annotated source.
 
 **[Read the guide →](https://reachjalil.github.io/claude-mod-kitchen-sink/) · [Try the experiments](docs/experiments.md) · [Read the source](plugins/kitchen-sink/hooks/register.js) · [Official references](docs/sources.md)**
 
 Independent community project. Not affiliated with or endorsed by Anthropic.
+
+[![Conceptual illustration: an event enters your hook; observe forwards it, rewrite forwards a changed copy, and answer returns a result locally.](site/assets/hook-event-flow.webp)](https://reachjalil.github.io/claude-mod-kitchen-sink/#playground)
+
+*Follow the event through a hook, then [try all three choices in the browser explainer](https://reachjalil.github.io/claude-mod-kitchen-sink/#playground).*
 
 ## Choose your starting point
 
@@ -121,4 +125,4 @@ The mod uses no network, process, automatic model, or session-messaging APIs. On
 - [Contributing](CONTRIBUTING.md): how to add one clear recipe and describe its limitations.
 - [GitHub Pages publishing](docs/publishing.md): reproduce or host the guide from your fork.
 
-Both plugin bundles and the guide use the [MIT license](LICENSE). Fork it, teach from it, or use a recipe as a starting point. Keep demonstrations synthetic and record the surface/version you actually checked.
+Both plugin bundles and the guide use the [MIT license](LICENSE). The self-hosted Manrope font uses the SIL Open Font License; see [asset notices](THIRD_PARTY_NOTICES.md). The [illustration brief](docs/illustration-brief.md) includes a reusable prompt and text explanation. Fork it, teach from it, or use a recipe as a starting point. Keep demonstrations synthetic and record the surface/version you actually checked.

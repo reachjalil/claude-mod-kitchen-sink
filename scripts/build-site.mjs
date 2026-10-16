@@ -9,7 +9,7 @@ if(!/^[\w.-]+\/[\w.-]+$/.test(repository))throw new Error('Expected GITHUB_REPOS
 await mkdir(out,{recursive:true});
 await cp(path.join(root,'site'),out,{recursive:true});
 let html=await readFile(path.join(out,'index.html'),'utf8');
-const rootDocs=new Set(['README.md','SECURITY.md','CONTRIBUTING.md','LICENSE']);
+const rootDocs=new Set(['README.md','SECURITY.md','CONTRIBUTING.md','LICENSE','THIRD_PARTY_NOTICES.md']);
 html=html.replace(/href="\.\/reference\/([^"]+)"/g,(_,file)=>`href="https://github.com/${repository}/blob/main/${rootDocs.has(file)?'':'docs/'}${file}"`);
 await writeFile(path.join(out,'index.html'),html);
 const raw=await readFile(path.join(root,'plugins/kitchen-sink/hooks/register.js'),'utf8');
@@ -32,7 +32,7 @@ const recipes=definitions.map(d=>{
 await writeFile(path.join(out,'assets/recipes.js'),`window.KITCHEN_GUIDE = ${JSON.stringify({repository:`https://github.com/${repository}`,recipes})};\n`);
 await mkdir(path.join(out,'reference'),{recursive:true});
 await cp(path.join(root,'docs'),path.join(out,'reference'),{recursive:true});
-for(const file of ['README.md','SECURITY.md','CONTRIBUTING.md','LICENSE'])await cp(path.join(root,file),path.join(out,'reference',file));
+for(const file of ['README.md','SECURITY.md','CONTRIBUTING.md','LICENSE','THIRD_PARTY_NOTICES.md'])await cp(path.join(root,file),path.join(out,'reference',file));
 execFileSync('python3',[path.join(root,'scripts/package-cowork.py')],{stdio:'inherit'});
 await mkdir(path.join(out,'downloads'),{recursive:true});
 await cp(path.join(root,'dist/kitchen-cowork.zip'),path.join(out,'downloads/kitchen-cowork.zip'));

@@ -8,6 +8,12 @@
 - `npm run site:build` and `npm run site:check`: static guide, six excerpts extracted from the actual current source, relative assets, unique anchors, downloadable ZIP and synthetic notes.
 - Browser acceptance: all three surface paths, all six source recipes, illustration counter, observe/rewrite/answer traces, ordinary-prompt pass-through, invalid and blank portion inputs, reset and local download/reference responses. Checked at a 1440-pixel desktop viewport and a 390-pixel emulated mobile viewport, including reduced motion. No horizontal overflow or browser console errors observed.
 
+## Illustrated guide update
+
+The guide now uses a self-hosted Manrope variable font and an original event-flow illustration. The site check verifies local CSS assets, descriptive image alt text, and reserved image dimensions as well as links and source excerpts. The diagram has a full-size link and equivalent selectable text. The font's SIL Open Font License is retained separately from the project license.
+
+Browser acceptance was refreshed for the sans-serif layout, compact navigation, image/font loading, the counter, surface paths, six source recipes and event simulations. The guide remains a browser lesson rather than a test of Claude Desktop.
+
 ## Review changes
 
 Draft buttons now preserve existing input and show a notice, avoiding accidental concatenation that would also prevent the prefix recipe from applying. A failed note-store read no longer prevents command registration. Packaging uses an explicit list of public files and refuses symlinks or paths escaping the plugin root. Regression checks cover these paths.
