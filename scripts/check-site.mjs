@@ -30,7 +30,8 @@ for(const [file,{html,ids}] of pages){
   const ref=match[1];references++;
   if(/^(https?:|data:|mailto:)/.test(ref))continue;
   assert.ok(!ref.startsWith('/'),`Root-relative asset breaks project Pages: ${ref}`);
-  const [pathname,hash]=ref.split('#');
+  const [urlpath,hash]=ref.split('#');
+  const pathname=urlpath.split('?')[0];
   const target=pathname?path.resolve(path.dirname(file),pathname):file;
   assert.ok(target===out || target.startsWith(out+path.sep),`Path escaped site output: ${ref}`);
   await stat(target);
@@ -57,6 +58,14 @@ for(const cssFile of ['style.css','course.css']){
  }
 }
 assert.equal(lessons.length,8);
+for(const file of ['index.html','lessons/03-cowork-workflow.html','reference.html']){
+ const html=pages.get(path.join(out,file)).html;
+ assert.match(html,/assets\/logo\.svg\?v=[a-f0-9]{12}/,'Version the shared logo for returning visitors');
+ assert.match(html,/course\.css\?v=[a-f0-9]{12}/,'Version course styles with the matching markup');
+}
+const courseScript=await readFile(path.join(out,'course.js'),'utf8');
+assert.match(courseScript,/progress\.mjs\?v=[a-f0-9]{12}/,'Version the progress module dependency');
+assert.match(courseScript,/paths\.mjs\?v=[a-f0-9]{12}/,'Version the path module dependency');
 for(const [i,lesson] of lessons.entries()){
  const page=pages.get(path.join(out,`lessons/${lesson.id}.html`));
  assert.ok(page,`Missing lesson ${lesson.id}`);

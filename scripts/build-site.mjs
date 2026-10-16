@@ -1,6 +1,7 @@
 import { mkdir, cp, readFile, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { renderCourse } from './render-course.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
@@ -41,5 +42,25 @@ execFileSync('python3',[path.join(root,'scripts/package-cowork.py')],{stdio:'inh
 await mkdir(path.join(out,'downloads'),{recursive:true});
 await cp(path.join(root,'dist/kitchen-cowork.zip'),path.join(out,'downloads/kitchen-cowork.zip'));
 await cp(path.join(root,'plugins/kitchen-cowork/examples/workshop-notes.md'),path.join(out,'downloads/workshop-notes.md'));
+// Version the browser's module dependencies as well as HTML assets, so a returning
+// reader cannot combine a new course script with an older cached progress API.
+const versions=new Map();
+const version=async file=>{
+ const content=await readFile(path.join(out,file));
+ versions.set(file,createHash('sha256').update(content).digest('hex').slice(0,12));
+};
+for(const file of ['progress.mjs','paths.mjs'])await version(file);
+const courseScript=(await readFile(path.join(out,'course.js'),'utf8'))
+ .replace(/from '(\.\/[^']+)'/g,(match,ref)=>versions.has(ref.slice(2))?`from '${ref}?v=${versions.get(ref.slice(2))}'`:match);
+await writeFile(path.join(out,'course.js'),courseScript);
+for(const file of ['course.js','app.js','style.css','course.css','assets/recipes.js','assets/logo.svg','assets/favicon.svg'])await version(file);
+for(const file of [...pages,'reference.html']){
+ const html=(await readFile(path.join(out,file),'utf8')).replace(/(href|src)="([^"?#]+)"/g,(match,attribute,ref)=>{
+  if(/^(?:https?:|data:|mailto:|#)/.test(ref))return match;
+  const asset=path.relative(out,path.resolve(out,path.dirname(file),ref));
+  return versions.has(asset)?`${attribute}="${ref}?v=${versions.get(asset)}"`:match;
+ });
+ await writeFile(path.join(out,file),html);
+}
 await writeFile(path.join(out,'.nojekyll'),'');
 console.log(`Built static guide: ${out}`);

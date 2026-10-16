@@ -16,6 +16,8 @@ Browser acceptance covered path selection and filtering; Cowork workflow → fir
 
 Screenshots were inspected at 1440px desktop, 390px mobile, and 320px mobile widths with reduced motion. All eight lessons were checked at 320px with their diagrams expanded: no horizontal page overflow was observed. The fixed mobile lesson navigation, quick-reference header, logo, and self-hosted font were inspected. No browser console errors were observed in the checked pages. At 390px, the fresh Cowork homepage's named start button begins at about 601px, within the first 844px viewport.
 
+The build also versions scripts, styles, logo assets, and imported course modules by content hash. Static checks assert those references, and a browser refresh verified the versioned modules load and the Cowork continuation remains correct.
+
 These checks concern the course website. The plugin code is unchanged in this update; earlier native-validation results below are retained rather than presented as new Claude Desktop acceptance. No participant usability study was performed. See [course UX decisions](course-ux.md) for rationale and a repeatable checklist.
 
 ## Initial course update

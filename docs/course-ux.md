@@ -21,6 +21,7 @@ The branding is independent of Anthropic's product marks. The event branch repre
 
 - `site/course-data.mjs` owns lesson content; `site/paths.mjs` chooses which lessons belong to each path. Shared lessons keep the same IDs across paths.
 - `scripts/render-course.mjs` builds the homepage and eight real lesson pages. `site/course.js` adjusts the active path, counts, resume action, and neighbors. `site/course.css` defines the responsive course layout.
+- The site build adds content-based versions to scripts, styles, logos, and the course's module imports. Returning readers load a matching set after a deployment, including when the progress module gains a new export.
 - Completion records use `kitchen-sink-course-progress-v1`. The separate `kitchen-sink-course-path-v1` value stores only `all`, `cowork`, or `code`. No quiz answers, identity, reading times, or activity logs are stored.
 - Valid `?path=` parameters take priority over the remembered preference. Lesson and course-home navigation carries the selected path in its URL. Switching paths preserves every valid completion mark. Completion changes from another tab update the current tab; its selected path stays in place.
 - Direct links to a lesson outside the selected path remain readable. The page explains the mismatch and offers a route back or a switch to all lessons. Returning to the path does not silently mark that extra lesson complete.
