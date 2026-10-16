@@ -8,7 +8,9 @@
     "test": "node --test tests/*.test.mjs",
     "validate": "node scripts/validate.mjs",
     "package:cowork": "python3 scripts/package-cowork.py",
-    "test:native": "claude plugin test ./plugins/kitchen-sink"
+    "test:native": "claude plugin test ./plugins/kitchen-sink",
+    "site:build": "node scripts/build-site.mjs",
+    "site:check": "node scripts/check-site.mjs"
   },
   "engines": {
     "node": ">=20"

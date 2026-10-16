@@ -10,8 +10,13 @@ export function register(on) {
   const record = (label) => { events = [...events, label].slice(-12); };
 
   on('session.start', async ($, e, next) => {
-    const saved = await $.store.get('scratch-note');
-    note = typeof saved === 'string' ? saved.slice(0, 500) : '';
+    // A damaged/unavailable note store should not prevent the lab from loading.
+    try {
+      const saved = await $.store.get('scratch-note');
+      note = typeof saved === 'string' ? saved.slice(0, 500) : '';
+    } catch {
+      record('note store unavailable; starting with an empty note');
+    }
     record('session.start');
     await $.tool.register({
       name: 'mix',
@@ -93,12 +98,22 @@ export function register(on) {
     let body = [];
     if (tab === 'recipes') body = [
       Text({ children: ['Explore a real mod, one small interaction at a time.'] }),
-      Text({ dimColor: true, children: ['Draft buttons append to your input. Review it, then send.'] }),
+      Text({ dimColor: true, children: ['Start with an empty input. Draft buttons fill it; review, then send.'] }),
       Button({ key: 'counter', label: `Click counter: ${clicks}`, onPress: () => { clicks += 1; $.ui.invalidate('ui.render'); } }),
       Button({ key: 'draft-brief', label: 'Draft a brief prompt', onPress: async () => {
+        const draft = await $.prompt.read();
+        if (draft.text) {
+          await $.ui.toast('Your draft is still there. Clear or send it before loading this example.');
+          return;
+        }
         await $.prompt.fill({ text: '[ks:brief] Explain how Claude Code mods work.', mode: 'append' });
       } }),
       Button({ key: 'draft-mix', label: 'Draft a demo tool request', onPress: async () => {
+        const draft = await $.prompt.read();
+        if (draft.text) {
+          await $.ui.toast('Your draft is still there. Clear or send it before loading this example.');
+          return;
+        }
         await $.prompt.fill({ text: 'Use the kitchen-sink mix tool to mix 2 imaginary portions.', mode: 'append' });
       } }),
       Text({ children: ['The tool has a 1–3 portion guard. The note tab persists only what you explicitly save.'] }),

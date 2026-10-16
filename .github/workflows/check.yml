@@ -14,5 +14,6 @@ jobs:
         with:
           python-version: '3.x'
       - run: npm test
-      - run: npm run package:cowork
+      - run: npm run site:build
+      - run: npm run site:check
 # Native Claude validation is a separate local check; this job does not claim it.

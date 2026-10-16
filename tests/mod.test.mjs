@@ -3,19 +3,19 @@ import assert from 'node:assert/strict';
 import { register } from '../plugins/kitchen-sink/hooks/register.js';
 
 // A tiny API double, not a renderer or a replacement for native validation.
-function lab(saved) {
+function lab(saved, options = {}) {
   const hooks = [];
   const store = new Map(saved === undefined ? [] : [['scratch-note', saved]]);
   const commands = [], tools = [], drafts = [];
   let pane = true;
   const elements = Object.fromEntries(['Box', 'Text', 'Button', 'Input'].map(name => [name, props => ({ type: name, ...props })]));
   const api = {
-    store: { get: async k => store.get(k), set: async (k,v) => { store.set(k,v); }, delete: async k => { store.delete(k); } },
+    store: { get: async k => { if (options.storeError) throw new Error('unavailable'); return store.get(k); }, set: async (k,v) => { store.set(k,v); }, delete: async k => { store.delete(k); } },
     command: { register: async c => { commands.push(c); } },
     tool: { register: async t => { tools.push(t); } },
     session: { surfaces: async () => [] },
-    prompt: { fill: async v => { drafts.push(v); return { isFilled: true }; } },
-    ui: { resolve: () => elements, invalidate: () => {}, open: async () => ({ isPlaced: pane }) },
+    prompt: { read: async () => ({ text: options.draft || '' }), fill: async v => { drafts.push(v); return { isFilled: true }; } },
+    ui: { resolve: () => elements, invalidate: () => {}, toast: async () => {}, open: async () => ({ isPlaced: pane }) },
   };
   register((event, filter, fn) => {
     if (typeof filter === 'function') { fn = filter; filter = {}; }
@@ -95,4 +95,16 @@ test('event labels remain bounded and reset does not remove the saved note', asy
   await control(tree,'reset-events').onPress();
   assert.match((await l.fire('command.run',{command:'kitchen-status'})).text,/turns: 0/);
   assert.equal(l.store.get('scratch-note'),'keep');
+});
+
+// Regression checks from the public-guide review.
+test('a note-store read failure still registers the lab', async () => {
+  const l=lab(undefined,{storeError:true}); await l.fire('session.start');
+  assert.deepEqual(l.commands.map(c=>c.name), ['kitchen','kitchen-status']);
+});
+test('draft buttons preserve an existing prompt instead of concatenating examples', async () => {
+  const l=lab(undefined,{draft:'Keep my work'}); await l.fire('session.start');
+  const tree=await l.render('Pane');
+  await control(tree,'draft-brief').onPress(); await control(tree,'draft-mix').onPress();
+  assert.equal(l.drafts.length,0);
 });

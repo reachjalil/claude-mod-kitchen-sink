@@ -15,7 +15,7 @@ flowchart LR
 
 The generic tool hook observes all calls and forwards them. A filtered handler answers only `mcp__kitchen-sink__mix`; invalid portions return a denial. It is a teaching guard, not a shell security policy. Its error handler also denies that imaginary operation.
 
-The model sees a registered demo tool and chooses whether to call it. UI draft buttons only fill the prompt box; the user sends the draft. The brief prefix transforms just that prompt. It does not modify the system prompt.
+The model sees a registered demo tool and chooses whether to call it. UI draft buttons first check that the prompt box is empty and preserve any existing draft; the user sends the draft. The brief prefix transforms just that prompt. It does not modify the system prompt.
 
 Tab, counters and a bounded 12-label event buffer live in memory and reset on module reload. Only the explicit scratch note save goes to the plugin store. It is limited to 500 characters, shared across local sessions of this plugin, and uses last-save-wins semantics. Existing sessions can show an older in-memory note until reload. There is no polling or concurrent merge algorithm.
 
