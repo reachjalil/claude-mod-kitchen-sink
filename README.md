@@ -14,7 +14,11 @@ Independent community project. Not affiliated with or endorsed by Anthropic.
 
 ## Follow the course
 
-The [course homepage](https://reachjalil.github.io/claude-mod-kitchen-sink/) has eight individually linked lesson pages in three sections:
+The [course homepage](https://reachjalil.github.io/claude-mod-kitchen-sink/) lets you choose a focused path:
+
+- **[Cowork workflows — 5 lessons](https://reachjalil.github.io/claude-mod-kitchen-sink/?path=cowork):** foundations, reusable instructions, your first change, and checking and sharing. This path skips the Code-only UI lessons.
+- **[Claude Code UI mods — 7 lessons](https://reachjalil.github.io/claude-mod-kitchen-sink/?path=code):** foundations, events, UI and state, plugin anatomy, your first change, and checking and sharing.
+- **[All 8 lessons](https://reachjalil.github.io/claude-mod-kitchen-sink/?path=all):** explore both surfaces in three sections:
 
 | Section | Lessons |
 | --- | --- |
@@ -22,7 +26,9 @@ The [course homepage](https://reachjalil.github.io/claude-mod-kitchen-sink/) has
 | Hands-on | [Cowork workflow](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/03-cowork-workflow.html), [events and hooks](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/04-follow-an-event.html), [UI and state](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/05-draw-and-redraw.html), [plugin anatomy](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/06-read-the-plugin.html) |
 | Finish and share | [Your first change](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/07-make-a-change.html), [check and share](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/08-check-and-share.html) |
 
-Every lesson has goals, an exercise, a short checkpoint, and previous/next navigation. Mark a lesson complete, undo the mark, or resume later. Only known lesson IDs and completion marks are saved in local browser storage; lessons stay open and no account is needed. The [original guide remains a quick reference](https://reachjalil.github.io/claude-mod-kitchen-sink/reference.html).
+Every lesson has goals, direct links to the exercise and optional checkpoint, and navigation that follows your chosen path. **Complete & continue** saves the current lesson and opens the next one. The homepage names the lesson you can resume. Switch paths without losing completion marks, or use **Progress settings → Reset completion marks → Undo reset** to recover a reset before leaving the page. Expand each visual explainer when you want the diagram alongside the text.
+
+Only known lesson IDs, completion marks, and your selected path are saved in local browser storage. No account is needed. A `?path=cowork` or `?path=code` link carries the learning path for someone you share it with; it does not share your progress. If storage is blocked, navigation still works and the page explains that completion will not persist. The [original guide remains a quick reference](https://reachjalil.github.io/claude-mod-kitchen-sink/reference.html). Read the [course UX notes](docs/course-ux.md) for the design decisions and a focused browser-check checklist.
 
 ## Choose your starting point
 

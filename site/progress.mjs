@@ -15,3 +15,9 @@ export function resumeLesson(value, ids) {
   if (progress.lastLesson && !progress.completed.includes(progress.lastLesson)) return progress.lastLesson;
   return ids.find(id=>!progress.completed.includes(id)) ?? ids[0];
 }
+// Completing-and-continuing must never undo an existing completion mark.
+export function completeLesson(value, id, ids) {
+  const progress=sanitizeProgress(value,ids);
+  if(!ids.includes(id)) return progress;
+  return { completed: progress.completed.includes(id) ? progress.completed : [...progress.completed,id], lastLesson:id };
+}

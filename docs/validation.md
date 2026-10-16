@@ -2,15 +2,25 @@
 
 ## Passed locally
 
-- `npm test`: 15 tests. Three cover course-progress sanitization, reversible completion, and resume selection. Eleven cover the mod's behavior through a small API double: prompt opt-in and pass-through, the custom tool guard, unrelated-tool forwarding, UI composition, draft buttons, counters, note persistence/deletion, headless fallback, bounded event labels and store-read failure. One checks the Cowork ZIP's exact member allowlist, MIT license, integrity and deterministic rebuild.
+- `npm test`: 19 tests. Seven cover course-progress sanitization, reversible and idempotent completion, resume selection, surface-specific lesson order, fallback paths, and counts that exclude other-path lessons. Eleven cover the mod's behavior through a small API double: prompt opt-in and pass-through, the custom tool guard, unrelated-tool forwarding, UI composition, draft buttons, counters, note persistence/deletion, headless fallback, bounded event labels and store-read failure. One checks the Cowork ZIP's exact member allowlist, MIT license, integrity and deterministic rebuild.
 - `npm run validate`: strict native validation of both plugins and the marketplace with Claude Code 2.1.301. All three pass without warnings. The inventory includes draft inspection/filling and UI notices, as used by the reviewed examples.
 - `npm run test:native`: one native host test spanning terminal and desktop element contracts. The real plugin is loaded; its pane is mounted, the counter pressed and notes tab opened. This is not the desktop app's final painting/layout.
 - `npm run site:build` and `npm run site:check`: ten static pages, eight linked lessons with checkpoints and completion controls, six excerpts extracted from the actual current source, relative assets, unique anchors, downloadable ZIP and synthetic notes.
 - Browser acceptance: all three surface paths, all six source recipes, illustration counter, observe/rewrite/answer traces, ordinary-prompt pass-through, invalid and blank portion inputs, reset and local download/reference responses. Checked at a 1440-pixel desktop viewport and a 390-pixel emulated mobile viewport, including reduced motion. No horizontal overflow or browser console errors observed.
 
-## Course update
+## Course UX update
 
-The site now builds a course homepage, eight lesson pages, and the original quick reference. Static checks cover 373 local/external references, unique IDs, accessible labels, image dimensions, self-hosted assets, previous/next links, checkpoints, and source-excerpt freshness. The logo is a shared SVG monogram used by the header and favicon.
+The current site has a five-lesson Cowork path, seven-lesson Code path, and full eight-lesson route. The header and favicon now share an SVG event-branch symbol. Static checks pass for ten pages, eight connected lessons, 401 references, 15 described/decorative image instances, and six current source excerpts.
+
+Browser acceptance covered path selection and filtering; Cowork workflow → first-change continuation; completion and repeated continuation without unmarking; reload persistence and named resume; switching paths; reset/undo on the homepage and in the mobile lesson menu; outside-path notices and return without an automatic completion mark; and the fully completed path state. A blocked-storage test verified the notice and working next navigation with the selected path in the URL. Quiz feedback cleared when changing answers. Diagram and mobile-menu disclosures opened with Enter and showed a visible focus outline.
+
+Screenshots were inspected at 1440px desktop, 390px mobile, and 320px mobile widths with reduced motion. All eight lessons were checked at 320px with their diagrams expanded: no horizontal page overflow was observed. The fixed mobile lesson navigation, quick-reference header, logo, and self-hosted font were inspected. No browser console errors were observed in the checked pages. At 390px, the fresh Cowork homepage's named start button begins at about 601px, within the first 844px viewport.
+
+These checks concern the course website. The plugin code is unchanged in this update; earlier native-validation results below are retained rather than presented as new Claude Desktop acceptance. No participant usability study was performed. See [course UX decisions](course-ux.md) for rationale and a repeatable checklist.
+
+## Initial course update
+
+The first course build added a homepage, eight lesson pages, and the original quick reference. Its static checks covered 373 local/external references, unique IDs, accessible labels, image dimensions, self-hosted assets, previous/next links, checkpoints, and source-excerpt freshness. Its initial letter-based logo has since been replaced by the event-branch symbol.
 
 Browser acceptance covered all eight lesson pages at a 320-pixel mobile viewport, including correct checkpoint feedback and each page's applicable controls. Incorrect-answer feedback, completion, undo, reload persistence, and homepage resume were checked explicitly. Desktop and 390-pixel mobile layouts were inspected. A blocked-local-storage test verified usable in-page controls and the non-persistence notice. The old `#recipes` deep link was checked for redirect to its new lesson.
 
