@@ -75,6 +75,6 @@ A failed store read does not stop the commands from registering. A saved note is
 
 Node tests inspect behavior through a small API double. Native `claude plugin test` loads the real plugin and checks interactions under the host's surface contracts. Static validation inventories hooks and APIs. None of those establishes the desktop app's final layout, successful Cowork import, or a real model's answer.
 
-The [browser simulation](https://reachjalil.github.io/claude-mod-kitchen-sink/#playground) illustrates the same three decisions using local JavaScript. It never connects to Claude. Its behavior is teaching material, not compatibility evidence.
+The [browser simulation](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/04-follow-an-event.html#playground) illustrates the same three decisions using local JavaScript. It never connects to Claude. Its behavior is teaching material, not compatibility evidence.
 
 For the full event and API contracts, use the [official reference](https://code.claude.com/docs/en/plugins/mods/reference) and your installed build's generated declarations. The latter win if the online reference differs.

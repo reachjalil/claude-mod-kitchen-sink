@@ -2,16 +2,20 @@ import { mkdir, cp, readFile, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { renderCourse } from './render-course.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const out=path.join(root,'dist/site');
 const repository=process.env.GITHUB_REPOSITORY || 'reachjalil/claude-mod-kitchen-sink';
 if(!/^[\w.-]+\/[\w.-]+$/.test(repository))throw new Error('Expected GITHUB_REPOSITORY in owner/name form');
 await mkdir(out,{recursive:true});
 await cp(path.join(root,'site'),out,{recursive:true});
-let html=await readFile(path.join(out,'index.html'),'utf8');
+const pages=await renderCourse(out,repository);
 const rootDocs=new Set(['README.md','SECURITY.md','CONTRIBUTING.md','LICENSE','THIRD_PARTY_NOTICES.md']);
-html=html.replace(/href="\.\/reference\/([^"]+)"/g,(_,file)=>`href="https://github.com/${repository}/blob/main/${rootDocs.has(file)?'':'docs/'}${file}"`);
-await writeFile(path.join(out,'index.html'),html);
+for(const file of [...pages,'reference.html']){
+ let html=await readFile(path.join(out,file),'utf8');
+ html=html.replace(/href="(?:\.\/|\.\.\/)reference\/([^"]+)"/g,(_,name)=>`href="https://github.com/${repository}/blob/main/${rootDocs.has(name)?'':'docs/'}${name}"`);
+ await writeFile(path.join(out,file),html);
+}
 const raw=await readFile(path.join(root,'plugins/kitchen-sink/hooks/register.js'),'utf8');
 const lines=raw.trimEnd().split('\n');
 const definitions=[

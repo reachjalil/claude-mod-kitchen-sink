@@ -8,4 +8,4 @@ Source: [Google Fonts Manrope directory](https://github.com/google/fonts/tree/ma
 
 ## Project illustration
 
-`site/assets/hook-event-flow.webp` is original conceptual artwork distributed with this project under the MIT license. The arrows explain a mod event handler, not the layout of the Claude application. The equivalent explanation is available as HTML text and in the interactive walkthrough.
+`site/assets/hook-event-flow.webp`, `extension-surfaces.webp`, `plugin-structure.webp`, and `ui-redraw-loop.webp` are original conceptual artwork distributed with this project under the MIT license. The arrows explain a mod event handler, not the layout of the Claude application. Equivalent explanations are available as HTML text and in the interactive walkthrough.

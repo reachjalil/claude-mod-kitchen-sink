@@ -9,3 +9,7 @@ Only a manually saved scratch note persists. Treat the plugin store as unencrypt
 The Cowork commands use normal model usage when invoked. They request conversational output and require user instruction before file writes. Model instructions are not a security boundary; retain normal host permissions.
 
 Use synthetic data when experimenting or reporting bugs. Remove secrets, real conversations, local paths and customer data from reports. Until a public repository security-reporting channel is configured, do not publish sensitive exploit details or private data in an issue.
+
+## Course progress
+
+The course stores known lesson IDs, completion marks, and the last-visited lesson in this browser's local storage. It stores no names, free-text notes, checkpoint answers, or activity log, and sends no progress to a server. Reset affects only this course's record. When storage is unavailable, lessons and exercises remain accessible and the UI reports that progress is not persistent.

@@ -7,3 +7,5 @@ Run `npm test`, `npm run test:native`, `npm run validate` with a recent Claude C
 Keep `$` calls explicit for native static analysis. Use relative imports confined to the plugin if you split files. Do not check in generated exact-build declarations, plugin store contents, credentials or session transcripts. Never assume a mock pass establishes native compatibility.
 
 For a bug report include app surface, relevant version, minimal synthetic reproduction, observed result and expected result. Screenshots should contain no private conversation content. Follow the MIT license.
+
+The course content is in `site/course-data.mjs`. Keep lesson IDs stable for deep links and local completion records. The static renderer owns shared navigation; add lesson content, objectives, an exercise, and a valid checkpoint answer together. Check a direct lesson refresh, previous/next links, a correct and incorrect answer, completion/undo, and browser persistence when changing the course. The original `site/reference.html` remains available as a reference.

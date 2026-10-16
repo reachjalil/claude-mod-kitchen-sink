@@ -14,9 +14,9 @@
     $('#surface-content').innerHTML=`<div class="path-header"><h3>${p.title}</h3><span class="path-badge">${p.badge}</span></div><p>${p.intro}</p><ol>${p.steps.map(s=>`<li>${escape(s)}</li>`).join('')}</ol><div class="command-box"><button class="copy" data-copy="path-command" type="button">Copy</button><pre id="path-command">${escape(p.commands)}</pre></div><p><strong>Know the boundary:</strong> ${p.note}</p><div class="hero-actions">${p.action}</div>`;
     if(window.KITCHEN_GUIDE) $$('[data-repo]').forEach(a=>a.href=window.KITCHEN_GUIDE.repository);
   }
-  $$('[data-surface]').forEach(b=>b.addEventListener('click',()=>surface(b.dataset.surface))); surface('cowork');
+  if ($('#surface-content')) { $$('[data-surface]').forEach(b=>b.addEventListener('click',()=>surface(b.dataset.surface))); surface('cowork'); }
   let count=0;
-  $('#hero-click').addEventListener('click',()=>{ count++; $('#hero-count').textContent=String(count).padStart(2,'0'); });
+  $('#hero-click')?.addEventListener('click',()=>{ count++; $('#hero-count').textContent=String(count).padStart(2,'0'); });
   let mode='observe';
   const behavior={ observe:{label:'A normal tool call',input:'Read README.md',description:'Observe the call and pass the same event to the next handler.'}, rewrite:{label:'A prompt with an explicit recipe prefix',input:'[ks:brief] Explain panes',description:'Remove the explicit prefix and add a request for a short answer. Ordinary prompts pass through unchanged.'}, answer:{label:'Imaginary portions (integer from 1 to 3)',input:'2',description:'Handle this demo tool here. Valid input gets a result; invalid input gets a denial. The downstream tool does not run.'} };
   function chooseMode(name) {
@@ -27,8 +27,8 @@
     $('#sim-output').textContent='Ready. Nothing has run yet.';
   }
   $$('[data-mode]').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.mode)));
-  $('#reset-sim').addEventListener('click',()=>chooseMode('observe'));
-  $('#run-sim').addEventListener('click',()=>{
+  $('#reset-sim')?.addEventListener('click',()=>chooseMode('observe'));
+  $('#run-sim')?.addEventListener('click',()=>{
     const text=$('#sim-input').value;
     if(mode==='observe') $('#sim-output').textContent=`1. Event arrives: ${text}\n2. Hook increments an in-memory counter.\n3. next(e) forwards the original event.\n4. The next handler can continue normally.\n\nSimulated only; no file was read.`;
     if(mode==='rewrite') {
@@ -49,8 +49,8 @@
     catch { const range=document.createRange();range.selectNodeContents(target);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);b.textContent='Select & copy';$('#copy-status').textContent='Clipboard unavailable. Text selected; use your copy shortcut.'; }
   });
   const source=window.KITCHEN_GUIDE;
-  if(source){
-    $$('[data-repo]').forEach(a=>a.href=source.repository);
+  if(source) $$('[data-repo]').forEach(a=>a.href=source.repository);
+  if(source && $('#recipe-list')){
     function recipe(id) {
       const r=source.recipes.find(x=>x.id===id);
       $$('#recipe-list button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.recipe===id)));
@@ -60,7 +60,7 @@
     $$('#recipe-list button').forEach(b=>b.addEventListener('click',()=>recipe(b.dataset.recipe)));recipe(source.recipes[0].id);
   }
   if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){$$('nav a').forEach(a=>{if(a.hash==='#'+entry.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}},{rootMargin:'-10% 0px -65% 0px'});
+    const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){$$('nav a[href^="#"]').forEach(a=>{if(a.hash==='#'+entry.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}},{rootMargin:'-10% 0px -65% 0px'});
     $$('.guide-section').forEach(s=>observer.observe(s));
   }
 })();

@@ -2,21 +2,33 @@
 
 **Learn Claude customization by changing one working example at a time.**
 
-A practical, MIT-licensed workshop for people who want to understand plugins and build their first Claude Code mod. Includes a Cowork workflow plugin, an interactive UI mod, and a [GitHub Pages field guide](https://reachjalil.github.io/claude-mod-kitchen-sink/) with an illustrated event-flow explainer, a browser simulation, and annotated source.
+A practical, MIT-licensed workshop for people who want to understand plugins and build their first Claude Code mod. Includes a Cowork workflow plugin, an interactive UI mod, and an [eight-lesson course](https://reachjalil.github.io/claude-mod-kitchen-sink/) with four illustrated explainers, exercises, checkpoints, and progress saved in your browser.
 
-**[Read the guide →](https://reachjalil.github.io/claude-mod-kitchen-sink/) · [Try the experiments](docs/experiments.md) · [Read the source](plugins/kitchen-sink/hooks/register.js) · [Official references](docs/sources.md)**
+**[Start the course →](https://reachjalil.github.io/claude-mod-kitchen-sink/) · [Try the experiments](docs/experiments.md) · [Read the source](plugins/kitchen-sink/hooks/register.js) · [Official references](docs/sources.md)**
 
 Independent community project. Not affiliated with or endorsed by Anthropic.
 
-[![Conceptual illustration: an event enters your hook; observe forwards it, rewrite forwards a changed copy, and answer returns a result locally.](site/assets/hook-event-flow.webp)](https://reachjalil.github.io/claude-mod-kitchen-sink/#playground)
+[![Conceptual illustration: an event enters your hook; observe forwards it, rewrite forwards a changed copy, and answer returns a result locally.](site/assets/hook-event-flow.webp)](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/04-follow-an-event.html#playground)
 
-*Follow the event through a hook, then [try all three choices in the browser explainer](https://reachjalil.github.io/claude-mod-kitchen-sink/#playground).*
+*Follow the event through a hook, then [try all three choices in the browser explainer](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/04-follow-an-event.html#playground).*
+
+## Follow the course
+
+The [course homepage](https://reachjalil.github.io/claude-mod-kitchen-sink/) has eight individually linked lesson pages in three sections:
+
+| Section | Lessons |
+| --- | --- |
+| Foundations | [Building blocks](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/01-building-blocks.html), [choose a surface](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/02-choose-your-surface.html) |
+| Hands-on | [Cowork workflow](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/03-cowork-workflow.html), [events and hooks](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/04-follow-an-event.html), [UI and state](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/05-draw-and-redraw.html), [plugin anatomy](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/06-read-the-plugin.html) |
+| Finish and share | [Your first change](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/07-make-a-change.html), [check and share](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/08-check-and-share.html) |
+
+Every lesson has goals, an exercise, a short checkpoint, and previous/next navigation. Mark a lesson complete, undo the mark, or resume later. Only known lesson IDs and completion marks are saved in local browser storage; lessons stay open and no account is needed. The [original guide remains a quick reference](https://reachjalil.github.io/claude-mod-kitchen-sink/reference.html).
 
 ## Choose your starting point
 
 | You want to… | Start here | What you will see |
 | --- | --- | --- |
-| Understand the idea before installing | [Interactive field guide](https://reachjalil.github.io/claude-mod-kitchen-sink/#playground) | A labeled browser simulation of observing, rewriting and answering an event |
+| Understand the idea before installing | [Event-and-hook lesson](https://reachjalil.github.io/claude-mod-kitchen-sink/lessons/04-follow-an-event.html#playground) | A labeled browser simulation of observing, rewriting and answering an event |
 | Customize a workflow in Cowork | [Cowork plugin](#try-the-cowork-workflow) | Reusable commands that turn supplied notes into an experiment card |
 | Add buttons, tabs and a pane | [Claude Code mod](#try-the-ui-mod) | An interactive lab inside a supported Claude Code surface |
 | Build your own version | [First-change tutorial](docs/build-your-first-mod.md) | An explained change with an observable result |
@@ -109,8 +121,8 @@ Native validation and host tests were run with Claude Code **2.1.301**. Browser 
 ```text
 plugins/kitchen-sink/     Real mod: manifest, hooks module, native host test
 plugins/kitchen-cowork/   Workflow commands and synthetic sample notes
-site/                    Static field-guide source: HTML, CSS, browser-only JS
-scripts/                 Validation, allowlisted packaging, site build/check
+site/                    Course content, reference HTML, CSS, browser-only JS
+scripts/                 Course rendering, validation, packaging, site build/check
 tests/                  Behavioral and distribution tests
 docs/                   Explainers, tutorials, troubleshooting, references
 ```
@@ -125,4 +137,4 @@ The mod uses no network, process, automatic model, or session-messaging APIs. On
 - [Contributing](CONTRIBUTING.md): how to add one clear recipe and describe its limitations.
 - [GitHub Pages publishing](docs/publishing.md): reproduce or host the guide from your fork.
 
-Both plugin bundles and the guide use the [MIT license](LICENSE). The self-hosted Manrope font uses the SIL Open Font License; see [asset notices](THIRD_PARTY_NOTICES.md). The [illustration brief](docs/illustration-brief.md) includes a reusable prompt and text explanation. Fork it, teach from it, or use a recipe as a starting point. Keep demonstrations synthetic and record the surface/version you actually checked.
+Both plugin bundles and the guide use the [MIT license](LICENSE). The self-hosted Manrope font uses the SIL Open Font License; see [asset notices](THIRD_PARTY_NOTICES.md). The [event-flow brief](docs/illustration-brief.md) and [course illustration briefs](docs/course-illustration-briefs.md) include reusable prompts and text explanations. Fork it, teach from it, or use a recipe as a starting point. Keep demonstrations synthetic and record the surface/version you actually checked.
