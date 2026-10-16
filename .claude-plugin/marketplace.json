@@ -1,0 +1,23 @@
+{
+  "name": "claude-mod-kitchen-sink",
+  "owner": {
+    "name": "Jalil"
+  },
+  "plugins": [
+    {
+      "name": "kitchen-sink",
+      "source": "./plugins/kitchen-sink",
+      "description": "Interactive Claude Code mod laboratory",
+      "version": "0.1.0"
+    },
+    {
+      "name": "kitchen-cowork",
+      "source": "./plugins/kitchen-cowork",
+      "description": "Cowork plugin experiments and guided lab",
+      "version": "0.1.0"
+    }
+  ],
+  "metadata": {
+    "description": "Hands-on Claude Desktop plugin and Claude Code mod examples"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "kitchen-sink",
+  "version": "0.1.0",
+  "description": "Interactive lab: panes, controls, notes, events, prompt recipes and a demo tool.",
+  "author": {
+    "name": "Jalil"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "kitchen-cowork",
+  "version": "0.1.0",
+  "description": "Guided Cowork experiments with commands and synthetic sample data.",
+  "author": {
+    "name": "Jalil"
+  },
+  "license": "MIT"
+}
